@@ -1,0 +1,24 @@
+#playground {
+  border-style:solid;
+  border-width:medium;
+
+}
+
+div.graph-axis-text-major {
+  visibility:hidden;
+  color: white;
+}
+
+#c_button {color: #ffffff;}
+
+
+button.load {
+    background-image: url(/img/load2.gif); /* 16px x 16px */
+    background-color: transparent; /* make the button transparent */
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 0px 0px;  /* equivalent to 'top left' */
+
+    height: 34px;           /* make this the size of your image */
+    padding-left: 24px;     /* make text start to the right of the image */
+    vertical-align: middle; /* align the text vertically centered */
+}

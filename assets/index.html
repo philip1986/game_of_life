@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="de" ng-app="main">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="way of life">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable = no" />
+    <link rel="stylesheet" href="/css/graph.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/js/vendor/angular.js"></script>
+    <script src="/js/vendor/graph.js"></script>
+    <script src="/js/main.js"></script>
+
+    <title>Conways Way of Life</title>
+  </head>
+  <body ng-controller="gameCtrl">
+    <div class="panel panel-default" >
+      <div id="addResource" class="panel-heading" ng-model="collapsedSettings">
+        <button ng-click="collapsedSettings=!collapsedSettings" type="button" class="btn btn-default btn-lg">
+          <span class="glyphicon glyphicon-cog"></span> Settings
+        </button>
+      </div>
+      <div class="panel-body" ng-show="collapsedSettings">
+        <ul class="list-group">
+          <li class="list-group-item">
+            Benchmark Mode:
+            <div class="btn-group">
+              <button type="button" class="btn btn-default" ng-class="{true: 'btn btn-info', false: 'btn btn-default'}[!settings.benchmark]" ng-click="settings.benchmark=false"> Off
+              <button type="button" class="btn btn-default" ng-class="{true: 'btn btn-info', false: 'btn btn-default'}[settings.benchmark]" ng-click="settings.benchmark=true"> On
+
+            </div>
+          </li>
+          <li class="list-group-item"><lable>Width: </lable><input type="range" min="40" step="4" max="1000" ng-model="settings.w"/>{{settings.w}}</li>
+          <li class="list-group-item"><lable>Hight: </lable><input type="range" min="40" step="4" max="1000" ng-model="settings.h"/>{{settings.h}}</li>
+          <li class="list-group-item">
+            Life: <input type="range" min="1" max="10" ng-model="settings.life"/>{{settings.life}}
+          </li>
+          <li class="list-group-item" ng-hide="settings.benchmark">
+            Output type:
+            <div class="btn-group">
+              <button type="button" class="btn btn-default" ng-class="{true: 'btn btn-info', false: 'btn btn-default'}[settings.imageType=='gif']"  ng-click="settings.imageType='gif'"> GIF
+              <button type="button" class="btn btn-default" ng-class="{true: 'btn btn-info', false: 'btn btn-default'}[settings.imageType=='png']" ng-click="settings.imageType='png'"> PNG
+              <button type="button" class="btn btn-default" ng-class="{true: 'btn btn-info', false: 'btn btn-default'}[settings.imageType=='svg']" ng-click="settings.imageType='svg'"> SVG
+            </div>
+          </li>
+          <li class="list-group-item">
+            Concurrency:
+            <div class="btn-group">
+              <button type="button" class="btn btn-default" ng-class="{true: 'btn btn-info', false: 'btn btn-default'}[settings.concurrency==1]"  ng-click="settings.concurrency=1"> 1
+              <button type="button" class="btn btn-default" ng-class="{true: 'btn btn-info', false: 'btn btn-default'}[settings.concurrency==2]" ng-click="settings.concurrency=2"> 2
+              <button type="button" class="btn btn-default" ng-class="{true: 'btn btn-info', false: 'btn btn-default'}[settings.concurrency==4]" ng-click="settings.concurrency=4"> 4
+            </div>
+          </li>
+          <li class="list-group-item" ng-hide="!settings.benchmark"><lable>Genteration to simulate: </lable><input type="range" min="2" max="1000" ng-model="settings.generations"/>{{settings.generations}}</li>
+        </ul>
+      </div>
+      <div id="addResource" class="panel-heading" ng-model="collapsedMetrics" ng-hide="settings.benchmark">
+        <button ng-click="collapsedMetrics=!collapsedMetrics" type="button" class="btn btn-default btn-lg">
+          <span class="glyphicon glyphicon-dashboard"></span> Metrics
+        </button>
+      </div>
+      <div class="panel-body" ng-show="collapsedMetrics" ng-hide="settings.benchmark">
+          {{stats.genCount}} Genteration </br>
+          {{stats.gps}} Gen. / second </br>
+          {{stats.avgGps}} avg Gen. / second
+      </div>
+    </div>
+    <div>
+
+      <div class="btn-group col-sm-offset-5" >
+
+        <button type="button" class="btn btn-default " ng-class="{true: 'load', false: ''}[load==true]" ng-click="play()"> <span ng-class="{true: '', false: 'glyphicon glyphicon-play'}[load==true]"></span></button>
+        <button type="button" class="btn btn-default" ng-disabled="settings.benchmark||state=='play'" ng-click="next()"> <span class="glyphicon glyphicon-forward"></span></button>
+        <button type="button" class="btn btn-default" ng-disabled="settings.benchmark" ng-click="pause()"> <span class="glyphicon glyphicon-pause"></span></button>
+        <button type="button" class="btn btn-default" ng-click="stop()"> <span class="glyphicon glyphicon-stop"></span></button>
+      </div>
+      <div id="container" class="col-md-10 col-md-offset-1">
+        </br>
+         <div ng-hide="!settings.benchmark" id="benchmark"></div>
+        <img ng-hide="settings.benchmark" id="playground" ng-src="{{imgageUrl}}" loaded="genLoaded()" width={{imgSize.w}} height={{imgSize.h}}/>
+
+
+      </div>
+    </div>
+  </body>
+</html>
