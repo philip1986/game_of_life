@@ -8,20 +8,15 @@ This is an example for parallelized calculations with goroutines. The task that 
   * Choice of diffrent concurrency levels
   * Benchmarke mode
 
-## How to run the game in the easiest Way
+## The easiest way to run the game
 
-  * Clone this repo. 'git clone https://github.com/philip1986/game_of_life.git'
-  * Execute './game'
+  * Clone this repo. `git clone https://github.com/philip1986/game_of_life.git`
+  * Execute `./game`
   * Open your browser (I recommend Chrome)
   * Request 'http://127.0.0.1:8080'
 
-## How to build the game
+## Build the game
 
   * Install [Go](http://golang.org/doc/install "Getting Started with Go")
   * Install [CoffeeScript](http://coffeescript.org/ "Getting Started with CoffeeScript")
-  * Run 'make build'
-
-
-
-
-
+  * Run `make build`
