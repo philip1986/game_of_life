@@ -9,7 +9,7 @@ This is an example for parallelized calculations with goroutines. The task that 
   * Benchmarke mode
 
 ## The easiest way to run the game
-  ** Attention: ** The binary version is compiled on system with x86 architecture (Intel i5). For other architectures you may have to build it again!
+  **Attention:** The binary version is compiled on system with x86 architecture (Intel i5). For other architectures you may have to build it again!
 
   * Clone this repo. `git clone https://github.com/philip1986/game_of_life.git`
   * Execute `./game`
